@@ -43,11 +43,11 @@ nav.scrolled {
 .logo {
     font-size: 2rem;
     font-weight: 700;
-    background: linear-gradient(to right, var(--primary), #4ef037);
+    background: linear-gradient(to right, #f037f0, #f037f0);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: glow 2s infinite alternate;
+    /* animation: glow 2s infinite alternate; */
 }
 
 @keyframes glow {
