@@ -1,5 +1,5 @@
 :root {
-    --primary: #1db954;
+    --primary: #881db9;
     --secondary: #121212;
     --dark: #000000;
     --light: #ffffff;
@@ -43,7 +43,7 @@ nav.scrolled {
 .logo {
     font-size: 2rem;
     font-weight: 700;
-    background: linear-gradient(to right, #f037f0, #f037f0);
+    background: linear-gradient(to bottom, #f037f0, #000000);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -214,7 +214,7 @@ nav.scrolled {
 
 .cta-button {
     padding: 15px 40px;
-    background: linear-gradient(to right, var(--primary), #4ef037);
+    background: var(--primary);
     color: var(--dark);
     border: none;
     border-radius: 30px;
@@ -229,7 +229,7 @@ nav.scrolled {
 
 .cta-button:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(29, 185, 84, 0.3);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
 }
 
 .cta-button:after {
@@ -575,7 +575,7 @@ textarea.form-control {
 }
 
 .submit-btn {
-    background: linear-gradient(to right, var(--primary), #4ef037);
+    background: var(--primary);
     color: var(--dark);
     border: none;
     padding: 15px 30px;
@@ -600,7 +600,7 @@ footer {
 .footer-logo {
     font-size: 2rem;
     font-weight: 700;
-    background: linear-gradient(to right, var(--primary), #4ef037);
+    background: linear-gradient(to bottom, var(--primary), #000000);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
