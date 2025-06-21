@@ -1,0 +1,501 @@
+:root {
+    --primary-color: #881db9;
+    --secondary-color: #121212;
+    --light-color: #000000;
+    --dark-color: #000000;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    overflow-x: hidden;
+}
+
+/* Mobile Navigation */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--secondary-color);
+}
+
+.menu-toggle {
+    display: block;
+    cursor: pointer;
+    font-size: 1.5rem;
+    z-index: 1001;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+    z-index: 1000;
+    padding-top: 5rem;
+}
+
+nav.active {
+    right: 0;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0 1rem;
+}
+
+nav ul li {
+    margin: 1rem 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+    font-size: 1.1rem;
+}
+
+nav ul li a:hover {
+    color: var(--secondary-color);
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--secondary-color);
+    bottom: -5px;
+    left: 0;
+    transition: var(--transition);
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Gallery Section */
+.gallery-container {
+    padding: 6rem 1rem 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.gallery-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    color: var(--primary-color);
+}
+
+.gallery-header p {
+    font-size: 1rem;
+    color: #7f8c8d;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    gap: 0.5rem;
+}
+
+.filter-btn {
+    padding: 0.4rem 1rem;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Masonry Grid - Single Column for Mobile */
+.gallery-grid {
+    column-count: 1;
+    column-gap: 1rem;
+}
+
+.gallery-item {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transition: var(--transition);
+}
+
+.item-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: var(--transition);
+    padding: 1rem;
+    text-align: center;
+}
+
+.gallery-item:hover .item-overlay {
+    opacity: 1;
+}
+
+.item-overlay h3 {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    transform: translateY(15px);
+    transition: var(--transition);
+}
+
+.item-overlay p {
+    color: #ddd;
+    font-size: 0.8rem;
+    transform: translateY(15px);
+    transition: var(--transition);
+    transition-delay: 0.1s;
+}
+
+.gallery-item:hover .item-overlay h3,
+.gallery-item:hover .item-overlay p {
+    transform: translateY(0);
+}
+
+.view-btn {
+    margin-top: 0.8rem;
+    padding: 0.4rem 1.2rem;
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transform: translateY(15px);
+    transition: var(--transition);
+    transition-delay: 0.2s;
+    font-size: 0.9rem;
+}
+
+.gallery-item:hover .view-btn {
+    transform: translateY(0);
+}
+
+/* Lightbox */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 95%;
+    max-height: 95%;
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 70vh;
+    display: block;
+    border-radius: 8px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -35px;
+    right: 0;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.lightbox-close:hover {
+    color: var(--secondary-color);
+}
+
+.lightbox-caption {
+    color: white;
+    text-align: center;
+    margin-top: 0.8rem;
+    font-size: 1rem;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+    transform: translateY(-50%);
+}
+
+.lightbox-nav-btn {
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    background: rgba(0, 0, 0, 0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-nav-btn:hover {
+    color: var(--secondary-color);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Footer */
+footer {
+    background: var(--dark-color);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin: 0.8rem 0;
+    background-color: #881db9;
+}
+
+.social-links a {
+    color: white;
+    font-size: 1.3rem;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* Tablet View */
+@media (min-width: 600px) {
+    .gallery-grid {
+        column-count: 2;
+    }
+    
+    .gallery-container {
+        padding: 7rem 1.5rem 1.5rem;
+    }
+    
+    .gallery-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .gallery-header p {
+        font-size: 1.1rem;
+    }
+}
+
+/* Desktop View */
+@media (min-width: 1024px) {
+    .menu-toggle {
+        display: none;
+    }
+    
+    nav {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 0;
+        background: transparent;
+    }
+    
+    nav ul {
+        flex-direction: row;
+    }
+    
+    nav ul li {
+        margin: 0 0 0 1.5rem;
+    }
+    
+    .gallery-grid {
+        column-count: 3;
+    }
+    
+    .gallery-container {
+        padding: 8rem 2rem 2rem;
+    }
+}
+
+/* Existing CSS remains the same until .gallery-grid */
+
+/* Mobile Slider Gallery */
+@media (max-width: 768px) {
+    .gallery-grid {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        scrollbar-width: none; /* Hide scrollbar for Firefox */
+        column-count: 0; /* Override masonry grid */
+        gap: 0; /* Remove gaps for slider */
+        margin: 0 0rem; /* Allow items to reach edge */
+        padding: 0 1rem; /* Compensate for negative margin */
+        
+    }
+    
+    .gallery-grid::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for Chrome/Safari */
+    }
+    
+    .gallery-item {
+        flex: 0 0 85%; /* Each item takes 85% of viewport */
+        scroll-snap-align: start;
+        margin-right: 1rem;
+        margin-bottom: 10;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .gallery-item:last-child {
+        margin-right: 0;
+    }
+    
+    /* Enhance touch feedback */
+    .gallery-item:active {
+        transform: scale(0.98);
+    }
+    
+    /* Adjust overlay for mobile */
+    .item-overlay {
+        padding: 1rem;
+    }
+    
+    .item-overlay h3 {
+        font-size: 1.3rem;
+    }
+    
+    .view-btn {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    /* Add scroll indicators (optional) */
+    .scroll-indicator {
+        text-align: center;
+        margin: 1rem 0;
+        color: var(--primary-color);
+        font-weight: bold;
+    }
+}
+
+/* Tablet View (slider with slightly larger items) */
+@media (min-width: 600px) and (max-width: 768px) {
+    .gallery-item {
+        flex: 0 0 70%;
+    }
+}
+
+/* Desktop View (original grid) */
+@media (min-width: 769px) {
+    .gallery-grid {
+        column-count: 3;
+        display: block;
+        overflow: visible;
+    }
+    
+    .gallery-item {
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Hide scroll indicator on desktop */
+    .scroll-indicator {
+        display: none;
+    }
+}
+
+/* Add this HTML after your gallery-grid div for mobile */

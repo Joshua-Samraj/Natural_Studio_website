@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Portfolio Gallery</title>
+    
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Natural<span style="color: black;">Studio</span></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="gallery-container">
+        <div class="gallery-header">
+            <h1>Our Creative Portfolio</h1>
+            <p>Explore our collection of stunning photography and design work that showcases our studio's creativity and expertise.</p>
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="portrait">Portrait</button>
+            <button class="filter-btn" data-filter="landscape">Landscape</button>
+            <button class="filter-btn" data-filter="wedding">Wedding</button>
+            <button class="filter-btn" data-filter="fashion">Fashion</button>
+        </div>
+
+        <div class="scroll-indicator">← Scroll →</div>
+        <div class="gallery-grid">
+            <!-- Gallery items will be added dynamically with JavaScript -->
+        </div>
+    </div>
+
+    <div class="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <img class="lightbox-img" src="" alt="">
+            <div class="lightbox-caption"></div>
+            <div class="lightbox-nav">
+                <button class="lightbox-nav-btn prev-btn">&larr;</button>
+                <button class="lightbox-nav-btn next-btn">&rarr;</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="logo">Natural<span style="color: #881db9;">Studio</span></div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+        </div>
+        <p>&copy; 2023 Natural Studio. All rights reserved.</p>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Gallery data
+        const galleryData = [
+            {
+                id: 1,
+                title: "Urban Portrait",
+                category: "portrait",
+                description: "Modern urban portrait session in downtown",
+                imgUrl: "static/portrait/1.jpg"
+            },
+            {
+                id: 2,
+                title: "Mountain Sunrise",
+                category: "landscape",
+                description: "Beautiful sunrise over mountain range",
+                imgUrl: "static/landscape/3.jpg"
+            },
+            {
+                id: 3,
+                title: "Bridal Portrait",
+                category: "wedding",
+                description: "Elegant bridal portrait with natural lighting",
+                imgUrl: "static/wedding/1.jpeg"
+            },
+            {
+                id: 4,
+                title: "Fashion Editorial",
+                category: "fashion",
+                description: "High fashion editorial shoot in studio",
+                imgUrl: "static/fasion/2.jpg"
+            },
+            {
+                id: 5,
+                title: "Beach Wedding",
+                category: "wedding",
+                description: "Romantic beach wedding ceremony",
+                imgUrl: "static/wedding/2.jpg"
+            },
+            {
+                id: 6,
+                title: "Forest Trail",
+                category: "landscape",
+                description: "Mystical forest trail in autumn",
+                imgUrl: "static/landscape/2.jpg"
+            },
+            {
+                id: 7,
+                title: "Studio Portrait",
+                category: "portrait",
+                description: "Professional studio portrait with dramatic lighting",
+                imgUrl: "static/portrait/2.jpg"
+            },
+            {
+                id: 8,
+                title: "Runway Fashion",
+                category: "fashion",
+                description: "High energy runway fashion show",
+                imgUrl: "static/fasion/1.jpeg"
+            },
+            {
+                id: 9,
+                title: "Desert Landscape",
+                category: "landscape",
+                description: "Vast desert landscape at golden hour",
+                imgUrl: "static/landscape/1.jpg"
+            }
+        ];
+
+        // DOM elements
+        const galleryGrid = document.querySelector('.gallery-grid');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.querySelector('.lightbox-img');
+        const lightboxCaption = document.querySelector('.lightbox-caption');
+        const closeBtn = document.querySelector('.lightbox-close');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+
+        // Current image index for lightbox navigation
+        let currentImageIndex = 0;
+
+        // Initialize gallery
+        function initGallery() {
+            galleryGrid.innerHTML = '';
+            galleryData.forEach((item, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = `gallery-item ${item.category}`;
+                galleryItem.dataset.index = index;
+                
+                galleryItem.innerHTML = `
+                    <img src="${item.imgUrl}" alt="${item.title}" class="gallery-img">
+                    <div class="item-overlay">
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                        <button class="view-btn">View</button>
+                    </div>
+                `;
+                
+                galleryGrid.appendChild(galleryItem);
+            });
+
+            // Add click event to gallery items
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    openLightbox(index);
+                });
+            });
+        }
+
+        // Filter gallery items
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                
+                if (filter === 'all') {
+                    document.querySelectorAll('.gallery-item').forEach(item => {
+                        item.style.display = 'block';
+                    });
+                } else {
+                    document.querySelectorAll('.gallery-item').forEach(item => {
+                        if (item.classList.contains(filter)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Open lightbox
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const item = galleryData[index];
+            
+            lightboxImg.src = item.imgUrl;
+            lightboxImg.alt = item.title;
+            lightboxCaption.textContent = item.title;
+            
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Navigate lightbox
+        function navigateLightbox(direction) {
+            if (direction === 'prev') {
+                currentImageIndex = (currentImageIndex - 1 + galleryData.length) % galleryData.length;
+            } else {
+                currentImageIndex = (currentImageIndex + 1) % galleryData.length;
+            }
+            
+            const item = galleryData[currentImageIndex];
+            lightboxImg.src = item.imgUrl;
+            lightboxImg.alt = item.title;
+            lightboxCaption.textContent = item.title;
+        }
+
+        // Event listeners
+        closeBtn.addEventListener('click', closeLightbox);
+        prevBtn.addEventListener('click', () => navigateLightbox('prev'));
+        nextBtn.addEventListener('click', () => navigateLightbox('next'));
+
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    navigateLightbox('prev');
+                } else if (e.key === 'ArrowRight') {
+                    navigateLightbox('next');
+                }
+            }
+        });
+
+        // Initialize the gallery
+        initGallery();
+    </script>
+</body>
+</html>
