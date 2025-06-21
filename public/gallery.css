@@ -532,7 +532,7 @@ footer {
         right: -100%;
         width: 70%;
         height: 100vh;
-        background-color: var(--primary-color);
+        background-color: black;
         transition: var(--transition);
         z-index: 1000;
         padding-top: 5rem;
