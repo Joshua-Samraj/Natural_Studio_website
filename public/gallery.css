@@ -454,7 +454,7 @@ footer {
     /* Adjust overlay for mobile */
     .item-overlay {
         padding: 1rem;
-        opacity: 0.81;
+        /* opacity: 0.1; */
         
         
     }
@@ -580,4 +580,5 @@ footer {
         transform: translateY(-9px) rotate(-45deg);
     }
 }
+
 
