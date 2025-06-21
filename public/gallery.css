@@ -499,3 +499,78 @@ footer {
 }
 
 /* Add this HTML after your gallery-grid div for mobile */
+
+
+
+/* Mobile Menu */
+/* Mobile Navigation Styles */
+.menu-toggle {
+    display: none; /* Hidden by default, shown only on mobile */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 1001;
+    position: relative;
+}
+
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+    transition: var(--transition);
+}
+
+/* Mobile menu styles */
+@media (max-width: 1024px) {
+    .menu-toggle {
+        display: flex;
+    }
+    
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: var(--primary-color);
+        transition: var(--transition);
+        z-index: 1000;
+        padding-top: 5rem;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    nav.active {
+        right: 0;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        padding: 0 2rem;
+    }
+    
+    nav ul li {
+        margin: 1.5rem 0;
+    }
+    
+    nav ul li a {
+        font-size: 1.2rem;
+    }
+    
+    /* Animate hamburger to X when menu is open */
+    body.menu-open .menu-toggle span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+    
+    body.menu-open .menu-toggle span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    body.menu-open .menu-toggle span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+}
+
