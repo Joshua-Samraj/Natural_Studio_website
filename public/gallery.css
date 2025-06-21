@@ -415,33 +415,28 @@ footer {
 /* Mobile Slider Gallery */
 @media (max-width: 768px) {
     .gallery-grid {
-        width: 100%;
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-        scrollbar-width: none; /* Hide scrollbar for Firefox */
-        column-count: 0; /* Override masonry grid */
-        gap: 0; /* Remove gaps for slider */
-        margin: 0 0rem; /* Allow items to reach edge */
-        padding: 0 1rem; /* Compensate for negative margin */
-        
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+        gap: 1rem;
+        overflow-x: visible;
+        scroll-snap-type: none;
+        margin: 0;
+        padding: 0;
+        column-count: 0; /* Reset masonry grid */
     }
     
     .gallery-grid::-webkit-scrollbar {
         display: none; /* Hide scrollbar for Chrome/Safari */
     }
     
-    .gallery-item {
-        
-        flex: 0 0 85%; /* Each item takes 85% of viewport */
-        scroll-snap-align: start;
-        margin-right: 1rem;
-        margin-bottom: 10;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+ .gallery-item {
+        width: 100%;
+        margin: 0;
+        flex: none;
+        scroll-snap-align: none;
+        height: auto;
+        aspect-ratio: 1/1; /* Make items square */
     }
-    
     .gallery-item:last-child {
         margin-right: 0;
     }
@@ -452,31 +447,25 @@ footer {
     }
     
     /* Adjust overlay for mobile */
-    .item-overlay {
-        padding: 1rem;
-        /* opacity: 0.1; */
-        
-        
+  .item-overlay {
+        padding: 0.8rem;
     }
     
     .item-overlay h3 {
-        font-size: 1.3rem;
-        
-
+        font-size: 1.1rem;
     }
     
     .view-btn {
-        padding: 0.6rem 1.5rem;
-        font-size: 1rem;
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+      /* Hide scroll indicator since we're not scrolling horizontally */
+    .scroll-indicator {
+        display: none;
     }
     
     /* Add scroll indicators (optional) */
-    .scroll-indicator {
-        text-align: center;
-        margin: 1rem 0;
-        color: var(--primary-color);
-        font-weight: bold;
-    }
+
 }
 
 /* Tablet View (slider with slightly larger items) */
@@ -580,5 +569,4 @@ footer {
         transform: translateY(-9px) rotate(-45deg);
     }
 }
-
 
