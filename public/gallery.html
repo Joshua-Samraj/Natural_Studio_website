@@ -10,6 +10,12 @@
 <body>
     <header>
         <div class="logo">Natural<span style="color: black;">Studio</span></div>
+        <!-- Add this inside your <header> after the logo -->
+<div class="menu-toggle" id="mobile-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -263,5 +269,25 @@
         // Initialize the gallery
         initGallery();
     </script>
+    * Add this JavaScript to handle the menu toggle */
+<script>
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    const nav = document.querySelector('nav');
+    const body = document.body;
+    
+    mobileMenu.addEventListener('click', function() {
+        nav.classList.toggle('active');
+        body.classList.toggle('menu-open');
+    });
+    
+    // Close menu when clicking on a link
+    document.querySelectorAll('nav ul li a').forEach(link => {
+        link.addEventListener('click', function() {
+            nav.classList.remove('active');
+            body.classList.remove('menu-open');
+        });
+    });
+</script>
 </body>
 </html>
